@@ -79,7 +79,7 @@ if ! [ -f "${gcc_tarball}" ]; then
 	wget --no-verbose 'https://github.com/gcc-mirror/gcc/archive/refs/heads/master.tar.gz' --output-document="${gcc_tarball}"
 	tar --directory="$(dirname "${gcc_directory}")" --extract --file="${gcc_tarball}"
 	
-	sed --in-place 's/LDBL_MANT_DIG == 113/defined(__powerpc__) || defined(__powerpc64__) || defined(__s390x__)/g' "${gcc_directory}/libgcc/dfp-bit.h"
+	# sed --in-place 's/LDBL_MANT_DIG == 113/defined(__powerpc__) || defined(__powerpc64__) || defined(__s390x__)/g' "${gcc_directory}/libgcc/dfp-bit.h"
 	sed --in-place 's/soft-fp.h/this-does-not-exist.h/g' "${gcc_directory}/libquadmath/math/sqrtq.c"
 	
 	patch --directory="${gcc_directory}" --strip='1' --input="${workdir}/submodules/obggcc/patches/0001-Fix-libgcc-build-on-arm.patch"
